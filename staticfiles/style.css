@@ -1,0 +1,39 @@
+.trash-item {
+    float: right;
+}
+#darkcyantitle{
+    color: darkcyan;
+
+}
+#user {
+    alignment: right;
+    color: purple;
+
+}
+
+#title {
+    color:  darkcyan;
+}
+#trash-item {
+    color: red;
+}
+#exit-item {
+    color: red;
+}
+#user {
+    color: purple;
+}
+#home {
+    color: blue;
+}
+#navbar {
+    margin-bottom: 40px;
+    margin-top: 15px;
+}
+
+#navbar1 {
+		border: solid 2px;
+		-webkit-border-radius: 10px;
+		-moz-border-radius: 10px;
+		border-radius: 10px;
+	}

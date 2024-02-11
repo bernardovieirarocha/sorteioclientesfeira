@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+
+
+
+{% block title %}Dashboard{% endblock %}
+
+
+
+
+
+
+
+
+{% block main2 %}
+
+<div class="col-12" align="center">
+		<h1 style="margin-right: 300px" class="title" id="title">Dashboard</h1>
+	</div>
+
+<a  href="{% url 'home'%}" style="margin-top: 100px" class="btn btn-success">Voltar</a>
+
+
+
+
+ <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load("current", {packages:['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    google.charts.setOnLoadCallback(drawChartGender);
+    google.charts.setOnLoadCallback(drawChartAge);
+
+    function drawChart() {
+
+      var idade0_18 = {{my_data.idade_0_18 }}
+      var idade19_21 = {{my_data.idade_19_21 }}
+      var idade21_60 = {{my_data.idade_21_60 }}
+      var idade60_mais = {{my_data.idade_60_mais }}
+
+      var data = google.visualization.arrayToDataTable([
+        ["Faixa", "Quantidade", { role: "style" } ],
+        ["0 a 18", parseInt(idade0_18), "#b87333"],
+        ["19 a 21",  parseInt(idade19_21), "silver"],
+        ["21 a 60",  parseInt(idade21_60), "gold"],
+        ["60 ou mais",  parseInt(idade60_mais), "color: #e5e4e2"]
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+
+      var options = {
+        title: "Idade das pessoas por faixas",
+        width: 600,
+        height: 400,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("IdadeChart"));
+      chart.draw(view, options);
+    }
+
+    function drawChartGender() {
+
+      var genderF = {{my_data.gender_person_F }}
+      var genderM = {{my_data.gender_person_M }}
+      var genderO = {{my_data.gender_person_O }}
+
+      var data = google.visualization.arrayToDataTable([
+        ["Tipo", "Quantidade", { role: "style" } ],
+        ["Feminino", parseInt(genderF), "purple"],
+        ["Masculino",  parseInt(genderM), "blue"],
+        ["Outro",  parseInt(genderO), "gold"],
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+
+      var options = {
+        title: "Idade das pessoas por faixas",
+        width: 600,
+        height: 400,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("GenderChart"));
+      chart.draw(view, options);
+    }
+    function drawChartAge() {
+
+      var media_idade = {{my_data.media_idade }}
+      var max_idade = {{my_data.max_idade }}
+      var min_idade = {{my_data.min_idade }}
+
+      var data = google.visualization.arrayToDataTable([
+        ["Quantidade", "Parametro", { role: "style" } ],
+        ["Idade Média", parseFloat(media_idade), "#b87333"],
+        ["Idade Max",  parseFloat(max_idade), "silver"],
+        ["Idade Min",  parseFloat(min_idade), "gold"],
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+
+      var options = {
+        title: "Idade das pessoas",
+        width: 600,
+        height: 400,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("AgeChart"));
+      chart.draw(view, options);
+    }
+  </script>
+<div id="IdadeChart" style="float: left; margin-left: 200px; margin-top: 175px "></div>
+<div id="GenderChart"  style="float: left;  margin-top: 175px " ></div>
+<div id="AgeChart" style="float:  left;  margin-top: 175px " ></div>
+
+
+{% endblock %}
+
+
+{% block footer %}
+	{% include 'footer.html' %}
+{%endblock%}

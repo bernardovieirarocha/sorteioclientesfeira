@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+
+Person Detail
+
+
+{% endblock %}
+
+{% block main %}
+
+<h1 style="color: darkcyan;">Person Detail</h1>
+
+<br>
+
+Name: {{ object.first_name }}  {{ object.last_name }}<br>
+Doc:  {{ object.doc }} <br>
+Age:  {{ object.age }} <br>
+Bio:  {{ object.bio}} <br>
+
+
+<br>
+
+<h2>Vendas</h2>
+{% for venda in vendas%}
+	<p>Venda_id: {{venda.id}}</p>
+	<h4>Lista de Produtos</h4>
+	<ul>
+		{%for produto in venda.produtos.all %}
+		<li>{{produto.id}} -- {{produto.descricao}}</li>
+		{%endfor%}
+	</ul>
+{%endfor%}
+
+<br>
+
+	<a href="{% url 'person_update_cbv' object.id %}" id="btn" class="btn btn-info">Update
+		<i class="fas fa-edit"></i>
+	</a>
+
+	<a href="{% url 'person_delete_cbv' object.id %}" class="btn btn-danger">Delete</a>
+
+
+{% block footer %}
+	{% include 'footer.html' %}
+{%endblock%}
+
+
+{%endblock%}

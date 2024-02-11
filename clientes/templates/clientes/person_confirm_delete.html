@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %} Delete {% endblock %}
+
+{% block main %}
+
+    <h2>Are you sure that you want delete this person?</h2>
+<br>
+	<h4>Name: {{person.first_name}}</h4>
+<br>
+
+<div class="col-12" style="margin-top: 100px">
+	<form  method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+        <button type="submit" class="btn btn-danger btn-lg btn-block">Delete</button>
+	</form>
+	</div>
+
+
+
+{% block footer %}
+	{% include 'footer.html' %}
+{%endblock%}
+
+
+{% endblock %}

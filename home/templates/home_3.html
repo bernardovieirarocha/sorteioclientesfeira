@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load bootstrap%}
+{% load static %}
+
+{% block title %} Seja Bem Vindo {% endblock %}
+
+{% block main %}
+
+
+
+	    <div class=".col-md-2">
+		    <h1 id="darkcyantitle">Template View</h1>
+            {{minha_variavel}}
+			</div>
+
+<br>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-success" >Enviar</button>
+</form>
+
+<br>
+
+<h4 style="color: red;">Template View or View tested method get and post!!</h4>
+
+
+{% block footer %}
+	{% include 'footer.html' %}
+{%endblock%}
+
+{%endblock%}
+
+{% block image%}
+
+	<div class="text-center">
+        <img src="{% static 'index.png' %}" class="rounded" alt="...">
+	</div>
+{%endblock%}
+
